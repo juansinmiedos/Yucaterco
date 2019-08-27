@@ -1,0 +1,194 @@
+body {
+    background-color: #006847;
+    font-family: monospace;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+h4 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+/* PÁGINA 1 - INICIO */
+
+#main-menu {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-menu > img{
+    width: 600px;
+    height: 265px;
+    padding-bottom: 100px;
+}
+
+#main-menu > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#main-menu > div img{
+    width: 200px;
+}
+
+#main-menu > div img:hover{
+    width: 250px;
+}
+
+/* PÁGINA 2 - INSTRUCCIONES*/
+
+#main-instructions{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-instructions > img{
+    width: 450px;
+    height: 199px;
+    padding: 50px 0;
+}
+
+#main-instructions > div > img{
+    padding: 50px 0;
+    width: 200px;
+}
+
+#main-instructions > div > img:hover{
+    width: 250px;
+}
+
+#instructions-panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: black;
+    width: 70vw;
+    height: 50vh;
+}
+
+#instructions-panel > div{
+    margin: 10px 50px;
+}
+
+#instructions-panel article{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 30px 0;
+}
+
+#instructions-panel article h4{
+    color: #ff0000;
+}
+
+#instructions-panel article h4 span{
+    color: #00f801;
+}
+
+#instructions-panel article div.character-img{
+    align-self: center;
+    width: 132px;
+}
+
+#instructions-panel article img{
+    max-height: 132px;
+    max-width: 132px;
+}
+
+/* PÁGINA 3 - ESCOGE A TU JUGADOR*/
+
+#main-choose{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-choose h1{
+    color: white;
+    font-size: 1.2rem;
+    padding-top: 20px;
+}
+
+#main-choose > img{
+    width: 450px;
+    height: 199px;
+    padding: 50px 0;
+}
+
+#main-choose img:nth-child(2){
+    width: 300px;
+    height: 150px;
+    padding: 0 0;
+}
+
+#main-choose div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#main-choose div article h2{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+#main-choose div article img{
+    margin: 100px 200px 0 200px;
+    width: 150px;
+}
+
+#main-choose div article img:hover{
+    width: 170px;
+}
+
+/* PÁGINA 4 - PLAYGROUND */
+
+#main-playground {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-playground > img{
+    width: 240px;
+    height: 106px;
+    padding-bottom: 40px;
+}
+
+#main-playground > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
