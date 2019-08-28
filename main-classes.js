@@ -10,7 +10,7 @@ class Ciudad {
         this.img2 = new Image()
         this.img2.src= './assets/background2.png'
         this.img1.onload = () => {
-            this.draw
+            this.draw()
         }
         this.img2.onload = () => {
             this.draw()
@@ -29,33 +29,35 @@ class Ciudad {
 }
 
 class Jugador {
-    constructor(y){
+    constructor(){
         this.x = 10
-        this.y = y
+        this.y = 360
         this.width = 64
         this.height = 77
         this.img = new Image()
         this.img.src = './assets/yucaterco.png'
+        //física del monito
         this.velY = 0
         this.grounded = false
         this.jumping = false
-        this.jumpStrength = 7
+        this.jumpStrength = 10
     }
 
     draw(){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
-        if(this.y <= 360){
-            this.y += 4
-        }
+        // if(this.y <= 360){
+        //     this.y += 4
+        // }
     }
 
-    jump(){
-        if(this.y = 360){
-            this.y -= 150
-        }
+    toca(obstacle){
+        return (
+            this.x < obstacle.x + obstacle.width && //atrás
+            this.x + this.width > obstacle.x && //en frente
+            this.y < obstacle.y + obstacle.height && //arriba (se suma con height porque el obstàculo no está pegado al margen superior)
+            this.y + this.height > obstacle.y //abajo
+        )
     }
-
-    toca(){}
 }
 
 class Helper {
@@ -75,7 +77,6 @@ class Helper {
     draw(){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
         if(this.y <= 360){
-            this.y += 4
         }
     }
 
@@ -100,7 +101,7 @@ class EnemigoTabasqueno {
     }
 
     draw(){
-        this.x--
+        this.x -=4
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
@@ -117,7 +118,7 @@ class EnemigoChilango {
     }
 
     draw(){
-        this.x--
+        this.x -= 3
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
@@ -175,7 +176,7 @@ class Soyinita {
 
 //DECLARACIONES
 const ciudad = new Ciudad()
-const player = new Jugador(360)
+const player = new Jugador()
 const helper = new Helper(360)
 // const myAudio = new Audio('./assets/audio-original.mp3'); 
 // myAudio.addEventListener('ended', function() {

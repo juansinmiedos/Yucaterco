@@ -70,12 +70,12 @@ p {
     padding: 50px 0;
 }
 
-#main-instructions > div > img{
+#main-instructions > div > a > img{
     padding: 50px 0;
     width: 200px;
 }
 
-#main-instructions > div > img:hover{
+#main-instructions > div > a > img:hover{
     width: 250px;
 }
 
