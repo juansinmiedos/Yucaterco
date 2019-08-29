@@ -84,13 +84,14 @@ p {
     justify-content: center;
     align-items: center;
     color: white;
-    background-color: black;
+    background-color: darkslategray;
     width: 70vw;
     height: 50vh;
 }
 
 #instructions-panel > div{
-    margin: 10px 50px;
+    margin: 10px 20px 10px 20px;
+    width: 50%;
 }
 
 #instructions-panel article{

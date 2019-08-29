@@ -1,6 +1,6 @@
 //FUNCIONES AUXILIARES
 function start() {
-    interval = setInterval(update, 750 / 60)
+    interval = setInterval(update, 500 / 60)
 }
 
 function stop() {
@@ -8,32 +8,155 @@ function stop() {
     interval = null
 }
 
-// function move(){
-//     if(!player.grounded){
-//         player.y += player.velY
-//         player.velY += gravity
-//     }
-//     if(player.y>=360){
-//         player.grounded = true
-//         player.jumping = false
-//         player.y = 360
-//     }
-//     if(document.onkeydown = 66){
-//         console.log(typeof(onkeydown))
-//         if(!player.jumping){
-//             player.velY = 0
-//             player.grounded = false
-//             player.jumping = true
-//             player.velY += -player.jumpStrength*2
-//         }
-//     }
-// }
+function move(){
+    if(!player.grounded){
+        player.y += player.velY
+        player.velY += gravity
+    }
+    if(player.y>=360){
+        player.grounded = true
+        player.jumping = false
+        player.y = 360
+    }
+    if(keys[87]){
+        if(!player.jumping){
+            player.velY = 0
+            player.grounded = false
+            player.jumping = true
+            player.velY += -player.jumpStrength*2
+        }
+    }
+    if(!helper.grounded){
+        helper.y += helper.velY
+        helper.velY += gravity
+    }
+    if(helper.y>=360){
+        helper.grounded = true
+        helper.jumping = false
+        helper.y = 360
+    }
+    if(keys[73]){
+        if(!helper.jumping){
+            helper.velY = 0
+            helper.grounded = false
+            helper.jumping = true
+            helper.velY += -helper.jumpStrength*2
+        }
+    }
+}
+
+function gameOver() {
+    let looser = new Image()
+    looser.src = './assets/pelana.png'
+    let looserX = canvas.width / 2 -200
+    let looserY = canvas.height / 2 -100
+    clearInterval(interval)
+    looser.onload = () => {
+        ctx.drawImage(looser, looserX, looserY, 400, 200)
+    }
+}
+
+function checkHealth() {
+    //TABASQUEÑO
+    enemigosTabasqueños.forEach((tab,i) => {
+        if(player.toca(tab)) {
+        enemigosTabasqueños.splice(i,1) 
+        return health -= tab.damage
+        }
+    })
+
+    enemigosChilangos.forEach((chi,i) => {
+        if(player.toca(chi)) {
+        enemigosChilangos.splice(i,1) 
+        return health -= chi.damage
+        }
+    })
+
+    soyinita.forEach((soy,i) => {
+        if(player.toca(soy)) {
+        soyinita.splice(i,1) 
+        return health -= soy.damage
+        }
+    })
+
+    cochinita.forEach((coc,i) => {
+        if(player.toca(coc)) {
+        cochinita.splice(i,1) 
+        return health += coc.heal
+        }
+    })
+
+    coquita.forEach((coq,i) => {
+        if(player.toca(coq)) {
+        coquita.splice(i,1) 
+        return health += coq.heal
+        }
+    })
+
+    bomba.forEach((bom,i) => {
+        if(player.toca(bom)) {
+        bomba.splice(i,1) 
+        
+        stop()
+        myAudio.pause()
+
+        let botonBomba = new Image()
+        botonBomba.src = './assets/bomba-button.png'
+        let botonBombaX = canvas.width / 2 -200
+        let botonBombaY = canvas.height / 2 -100
+
+        //clearInterval(interval)
+        botonBomba.onload = () => {
+            ctx.drawImage(botonBomba, botonBombaX, botonBombaY, 400, 200)
+        }
+
+        //Aquí debe ir el còdigo que selecciona una bomba random, la reproduce y al terminar sigue la vida
+        let bombaRandom = audiosBombas[Math.floor(Math.random()*(audiosBombas.length - 1))];
+        bombaRandom.addEventListener('ended', function() {
+            myAudio.play()
+            start()
+            return health += bom.heal
+        }, false)
+        bombaRandom.play()
+        }
+    })
+
+    //CAMPECHANO
+    soyinita.forEach((soy,i) => {
+        if(helper.toca(soy)) {
+        soyinita.splice(i,1) 
+        return health += soy.damage
+        }
+    })
+
+    cochinita.forEach((coc,i) => {
+        if(helper.toca(coc)) {
+        cochinita.splice(i,1) 
+        return health -= coc.heal
+        }
+    })
+
+    coquita.forEach((coq,i) => {
+        if(helper.toca(coq)) {
+        coquita.splice(i,1) 
+        return health -= coq.heal
+        }
+    })
+
+    bomba.forEach((bom,i) => {
+        if(helper.toca(bom)) {
+        bomba.splice(i,1) 
+        return health += bom.heal
+        }
+    })
+
+    if(health <= 0) return gameOver()
+}
 
 function drawHealth(){
-    score = 100
     ctx.font = '24px Monospace'
     ctx.fillText('SALUD', 30, 50)
-    ctx.fillText(score, 30, 80)
+    ctx.fillText(health, 30, 80)
 }
 
 function crearEnemigosTabasqueños() {
@@ -61,8 +184,12 @@ function dibujarEnemigosChilangos() {
 }
 
 function crearCochinita() {
+    const min = 80
+    const max = 360
+    const defPosition = 365
     if (frames % 1800 === 0) {
-        cochinita.push(new Cochinita(canvas.width, 360, +25))
+        const randomPosition = Math.floor(Math.random() * (max - min))
+        cochinita.push(new Cochinita(canvas.width, defPosition))
     }
 }
 
@@ -73,8 +200,12 @@ function dibujarCochinita() {
 }
 
 function crearSoyinita() {
+    const min = 80
+    const max = 360
+    const defPosition = 360
     if (frames % 2300 === 0) {
-        soyinita.push(new Soyinita(canvas.width, 360, -30))
+        const randomPosition = Math.floor(Math.random() * (max - min))
+        soyinita.push(new Soyinita(canvas.width, defPosition))
     }
 }
 
@@ -85,14 +216,31 @@ function dibujarSoyinita() {
 }
 
 function crearCoquita() {
+    const min = 80
+    const max = 360
+    const defPosition = 345
     if (frames % 1300 === 0) {
-        coquita.push(new Coquita(canvas.width, 360, +15))
+        const randomPosition = Math.floor(Math.random() * (max - min))
+        coquita.push(new Coquita(canvas.width, defPosition))
     }
 }
 
 function dibujarCoquita() {
     coquita.forEach(coquita => {
         coquita.draw()
+    })
+}
+
+function crearBomba() {
+    const defPosition = 200
+    if (frames % 2500 === 0) {
+        bomba.push(new Bomba(canvas.width, defPosition))
+    }
+}
+
+function dibujarBomba() {
+    bomba.forEach(bomba => {
+        bomba.draw()
     })
 }
 
@@ -107,89 +255,34 @@ function update(){
     crearCochinita()
     crearCoquita()
     crearSoyinita()
+    crearBomba()
     dibujarEnemigosTabasqueños()
     dibujarEnemigosChilangos()
     dibujarCochinita()
     dibujarCoquita()
     dibujarSoyinita()
+    dibujarBomba()
     drawHealth()
+    checkHealth() 
     move()
 }
 
-function gameOver() {
-    let looser = new Image()
-    looser.src = './assets/pelana.png'
-    let looserX = 200
-    let looserY = 100
-    ctx.drawImage(looser, looserX, looserY,)
-    // ctx.font = '50px Courier'
-    // ctx.fillText('Game Over', canvas.width / 2 - 100, 200)
-    clearInterval(interval)
-}
-  
-function checkCollition() {
-    if (player.y > canvas.height - player.height) return gameOver()
-    pipes.forEach(pipe => { 
-        if (player.isTouching(pipe)) return gameOver()
-    })
-}
-  
-
 start()
 
-document.onkeydown = e => {
-    switch(e.keyCode){
-        // case 38:
-        //     player.jump()
-        //     break
-        case 87:
-            helper.jump()
-            
-            break
-        case 32:
-            if(interval){
-                stop()
-            } else {
-                start()
-            }
-            break
-        default:
-            break
+//listeners
+addEventListener('keydown', e=>{
+    if(e.keyCode === 32){
+        if(interval){
+            stop()
+            myAudio.pause()
+        } else {
+            start()
+            myAudio.play()
+        }
     }
-}
-
-
-
-/*para que pare cuando deje de presionar la tecla
-document.onkeyup = e => {
-    switch(e.keyCode){
-        case 38:
-            break
-        default:
-            break
-    }
-}
-*/
-
-
-
-// document.onkeydown = e => {
-//     switch(e.keyCode){
-//         // case 38:
-//         //     player.jump()
-//         //     break
-//         case 87:
-//             helper.jump()
-            
-//             break
-//         case 32:
-//             if(interval){
-//                 stop()
-//             } else {
-//                 start()
-//             }
-//             break
-//         default:
-//             break
-//     }
-// }
+    keys[e.keyCode] = true
+  })
+  
+  addEventListener('keyup', e=>{
+    keys[e.keyCode] = false
+  })

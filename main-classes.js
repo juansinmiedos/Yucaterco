@@ -18,7 +18,7 @@ class Ciudad {
     }
 
     draw() {
-        this.x--
+        this.x -=2
         if(this.x < -(canvas.width*2)){
             this.x = -canvas.width
         }
@@ -45,9 +45,6 @@ class Jugador {
 
     draw(){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
-        // if(this.y <= 360){
-        //     this.y += 4
-        // }
     }
 
     toca(obstacle){
@@ -71,7 +68,7 @@ class Helper {
         this.velY = 0
         this.grounded = false
         this.jumping = false
-        this.jumpStrength = 7
+        this.jumpStrength = 10
     }
 
     draw(){
@@ -80,13 +77,14 @@ class Helper {
         }
     }
 
-    jump(){
-        if(this.y = 360){
-            this.y -= 150
-        }
+    toca(obstacle){
+        return (
+            this.x < obstacle.x + obstacle.width && //atrás
+            this.x + this.width > obstacle.x && //en frente
+            this.y < obstacle.y + obstacle.height && //arriba (se suma con height porque el obstàculo no está pegado al margen superior)
+            this.y + this.height > obstacle.y //abajo
+        )
     }
-
-    toca(){}
 }
 
 class EnemigoTabasqueno {
@@ -95,13 +93,13 @@ class EnemigoTabasqueno {
         this.y = y
         this.width = 77
         this.height = 73
-        this.damage = -20//ESTO SE PONE AQUI????
+        this.damage = 20
         this.img = new Image()
         this.img.src = './assets/tabasqueñito.png'
     }
 
     draw(){
-        this.x -=4
+        this.x -=5
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
@@ -112,64 +110,82 @@ class EnemigoChilango {
         this.y = y
         this.width = 68
         this.height = 73
-        this.damage = -35//ESTO SE PONE AQUI????
+        this.damage = 35
         this.img = new Image()
         this.img.src = './assets/chilanguito.png'
     }
 
     draw(){
-        this.x -= 3
+        this.x -= 4
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
 class Cochinita {
-    constructor(x, y, addRemoveScore){
+    constructor(x, y){
         this.x = x
         this.y = y
         this.width = 70
         this.height = 41
-        this.addRemoveScore = addRemoveScore
+        this.heal = 25
         this.img = new Image()
         this.img.src = './assets/cochinita.png'
     }
 
     draw(){
-        this.x--
+        this.x -=3
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
 class Coquita{
-    constructor(x, y, addRemoveScore){
+    constructor(x, y){
         this.x = x
         this.y = y
         this.width = 50
         this.height = 99
-        this.addRemoveScore = addRemoveScore
+        this.heal = 15
         this.img = new Image()
         this.img.src = './assets/coquita.png'
     }
 
     draw(){
-        this.x--
+        this.x -=3
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
 class Soyinita {
-    constructor(x, y, addRemoveScore){
+    constructor(x, y){
         this.x = x
         this.y = y
         this.width = 70
         this.height = 49
+        this.damage = 30
         this.addRemoveScore = addRemoveScore
         this.img = new Image()
         this.img.src = './assets/soyinita.png'
     }
 
     draw(){
-        this.x--
+        this.x -=3
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+    }
+}
+
+class Bomba {
+    constructor(x, y){
+        this.x = x
+        this.y = y
+        this.width = 46
+        this.height = 70
+        this.heal = 50
+        this.img = new Image()
+        this.img.src = './assets/bomba.png'
+    }
+
+    draw(){
+        this.x -= 1
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
@@ -178,9 +194,9 @@ class Soyinita {
 const ciudad = new Ciudad()
 const player = new Jugador()
 const helper = new Helper(360)
-// const myAudio = new Audio('./assets/audio-original.mp3'); 
-// myAudio.addEventListener('ended', function() {
-//     this.currentTime = 0;
-//     this.play();
-// }, false);
-// myAudio.play();
+const myAudio = new Audio('./assets/audio-original.mp3')
+myAudio.addEventListener('ended', function() {
+    this.currentTime = 0
+    this.play()
+}, false)
+myAudio.play()
