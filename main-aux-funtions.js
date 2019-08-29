@@ -270,7 +270,7 @@ function update(){
     move()
 }
 
-start()
+//start()
 
 //listeners
 addEventListener('keydown', e=>{
