@@ -1,11 +1,13 @@
 //FUNCIONES AUXILIARES
 function start() {
     interval = setInterval(update, 500 / 60)
+    myAudio.play()
 }
 
 function stop() {
     clearInterval(interval)
     interval = null
+    myAudio.pause()
 }
 
 function move(){
@@ -54,6 +56,7 @@ function gameOver() {
     looser.onload = () => {
         ctx.drawImage(looser, looserX, looserY, 400, 200)
     }
+    myAudio.pause()
 }
 
 function checkHealth() {
@@ -98,7 +101,7 @@ function checkHealth() {
         bomba.splice(i,1) 
         
         stop()
-        myAudio.pause()
+        //myAudio.pause()
 
         let botonBomba = new Image()
         botonBomba.src = './assets/bomba-button.png'
@@ -113,7 +116,7 @@ function checkHealth() {
         //Aquí debe ir el còdigo que selecciona una bomba random, la reproduce y al terminar sigue la vida
         let bombaRandom = audiosBombas[Math.floor(Math.random()*(audiosBombas.length - 1))];
         bombaRandom.addEventListener('ended', function() {
-            myAudio.play()
+            //myAudio.play()
             start()
             return health += bom.heal
         }, false)
@@ -274,10 +277,8 @@ addEventListener('keydown', e=>{
     if(e.keyCode === 32){
         if(interval){
             stop()
-            myAudio.pause()
         } else {
             start()
-            myAudio.play()
         }
     }
     keys[e.keyCode] = true

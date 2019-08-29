@@ -11,8 +11,8 @@
     <section id="main-menu">
         <img src="./assets/logo.png" alt="">
         <div>
-            <a onclick="mostrarOcultar('main-menu')"><img src="./assets/1-player-button.png" alt="1-player"></a>
-            <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/2-player-button.png" alt="2players"></a>
+            <a id="btn-1-player"><img src="./assets/1-player-button.png" alt="1-player"></a>
+            <a id="btn-2-player"><img src="./assets/2-player-button.png" alt="2players"></a>
         </div>
     </section>
     <section id="main-instructions">
@@ -102,35 +102,35 @@
             </div>
         </div>
         <div id="continue-button">
-            <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/continuar.png" alt=""></a>
+            <a onclick="mostrarOcultar('main-instructions', 'main-choose-p1')"><img src="./assets/continuar.png" alt=""></a>
         </div>
     </section>
-    <section id="main-choose">
+    <section id="main-choose-p1">
         <img src="./assets/logo.png" alt="">
         <img src="./assets/player-1-button.png" alt="">
         <h1>Controles: W (salto) / espacio (pausa)</h1>
         <div>
             <article>
-                <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/yucaterco.png" alt="yucaterco"></a>
+                <a id="img-player-1-yucaterco"><img src="./assets/yucaterco.png" alt="yucaterco"></a>
                 <h2>Yucaterco</h2>
             </article>
             <article>
-                <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/yucaterca.png" alt="yucaterca"></a>
+                <a id="img-player-1-yucaterca"><img src="./assets/yucaterca.png" alt="yucaterca"></a>
                 <h2>Yucaterca</h2>
             </article>
         </div>
     </section>
-    <section id="main-choose">
+    <section id="main-choose-p2">
         <img src="./assets/logo.png" alt="">
         <img src="./assets/player-2-button.png" alt="">
         <h1>Controles: I (salto) / espacio (pausa)</h1>
         <div>
             <article>
-                <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/campechanito.png" alt="campechanito"></a>
+                <a id="img-player-2-campechano"><img src="./assets/campechanito.png" alt="campechanito"></a>
                 <h2>Campechano</h2>
             </article>
             <article>
-                <a href="#" onclick='ANCHORTAGFUNCTION()'><img src="./assets/campechanita.png" alt="campechanita"></a>
+                <a  id="img-player-2-campechana"><img src="./assets/campechanita.png" alt="campechanita"></a>
                 <h2>Campechana</h2>
             </article>
         </div>

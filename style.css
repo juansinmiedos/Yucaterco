@@ -58,7 +58,7 @@ p {
 
 #main-instructions{
     height: 100vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -120,42 +120,42 @@ p {
     max-width: 132px;
 }
 
-/* PÁGINA 3 - ESCOGE A TU JUGADOR*/
+/* PÁGINA 3 - ESCOGE A TU JUGADOR - PLAYER 1*/
 
-#main-choose{
+#main-choose-p1{
     height: 100vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#main-choose h1{
+#main-choose-p1 h1{
     color: white;
     font-size: 1.2rem;
     padding-top: 20px;
 }
 
-#main-choose > img{
+#main-choose-p1 > img{
     width: 450px;
     height: 199px;
     padding: 50px 0;
 }
 
-#main-choose img:nth-child(2){
+#main-choose-p1 img:nth-child(2){
     width: 300px;
     height: 150px;
     padding: 0 0;
 }
 
-#main-choose div{
+#main-choose-p1 div{
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 100px;
 }
 
-#main-choose div article h2{
+#main-choose-p1 div article h2{
     display: flex;
     align-content: center;
     justify-content: center;
@@ -163,12 +163,64 @@ p {
     font-size: 2rem;
 }
 
-#main-choose div article img{
+#main-choose-p1 div article img{
     margin: 100px 200px 0 200px;
     width: 150px;
 }
 
-#main-choose div article img:hover{
+#main-choose-p1 div article img:hover{
+    width: 170px;
+}
+
+/* PÁGINA 3 - ESCOGE A TU JUGADOR - PLAYER 1*/
+
+#main-choose-p2{
+    height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-choose-p2 h1{
+    color: white;
+    font-size: 1.2rem;
+    padding-top: 20px;
+}
+
+#main-choose-p2 > img{
+    width: 450px;
+    height: 199px;
+    padding: 50px 0;
+}
+
+#main-choose-p2 img:nth-child(2){
+    width: 300px;
+    height: 150px;
+    padding: 0 0;
+}
+
+#main-choose-p2 div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#main-choose-p2 div article h2{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+#main-choose-p2 div article img{
+    margin: 100px 200px 0 200px;
+    width: 150px;
+}
+
+#main-choose-p2 div article img:hover{
     width: 170px;
 }
 
@@ -176,7 +228,7 @@ p {
 
 #main-playground {
     height: 90vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;

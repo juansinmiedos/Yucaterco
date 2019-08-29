@@ -29,13 +29,16 @@ class Ciudad {
 }
 
 class Jugador {
-    constructor(){
+    constructor(type){
         this.x = 10
         this.y = 360
         this.width = 64
         this.height = 77
+        this.type = type
         this.img = new Image()
         this.img.src = './assets/yucaterco.png'
+        this.img2 = new Image()
+        this.img2.src = './assets/yucaterca.png'
         //física del monito
         this.velY = 0
         this.grounded = false
@@ -44,7 +47,13 @@ class Jugador {
     }
 
     draw(){
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+        if (this.type) {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+        } else {
+            ctx.drawImage(this.img2, this.x, this.y, this.width, this.height)
+        }
+
+        //ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 
     toca(obstacle){
@@ -58,13 +67,16 @@ class Jugador {
 }
 
 class Helper {
-    constructor(y){
+    constructor(type){
         this.x = 110
-        this.y = y
+        this.y = 360
         this.width = 64
         this.height = 77
+        this.type = type
         this.img = new Image()
         this.img.src = './assets/campechanito.png'
+        this.img2 = new Image()
+        this.img2.src = './assets/campechanita.png'
         this.velY = 0
         this.grounded = false
         this.jumping = false
@@ -72,9 +84,13 @@ class Helper {
     }
 
     draw(){
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
-        if(this.y <= 360){
+        if (this.type) {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+        } else {
+            ctx.drawImage(this.img2, this.x, this.y, this.width, this.height)
         }
+        
+        //ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 
     toca(obstacle){
@@ -192,11 +208,105 @@ class Bomba {
 
 //DECLARACIONES
 const ciudad = new Ciudad()
-const player = new Jugador()
-const helper = new Helper(360)
+let player //= new Jugador()
+let helper//= new Helper()
 const myAudio = new Audio('./assets/audio-original.mp3')
 myAudio.addEventListener('ended', function() {
     this.currentTime = 0
     this.play()
 }, false)
-myAudio.play()
+//myAudio.play()
+
+
+
+// MOSTRAR OCULTAR DIVS -GENERAL
+function mostrarOcultar(id, id2){
+    if(document.getElementById){
+        let el = document.getElementById(id)
+        el.style.display = (el.style.display == 'none') ? 'flex' : 'none';
+
+        let el2 = document.getElementById(id2)
+        el2.style.display = (el2.style.display == 'flex') ? 'none' : 'flex';
+    }
+}
+
+// SI PRESIONA 1 JUGADOR, INSTACIA 1 JUGADOR
+document.querySelector('#btn-1-player').addEventListener('click', e=> {
+    player = new Jugador()
+
+    let nowMainMenu = document.getElementById('main-menu')
+    nowMainMenu.style.display = (nowMainMenu.style.display == 'none') ? 'flex' : 'none';
+
+    let nextMainInstructions = document.getElementById('main-instructions')
+    nextMainInstructions.style.display = (nextMainInstructions.style.display == 'flex') ? 'none' : 'flex';
+})
+
+// SI PRESIONA 2 JUGADORES, INSTACIA 2 JUGADORES
+document.querySelector('#btn-2-player').addEventListener('click', e=> {
+    player = new Jugador()
+    helper = new Helper()
+
+    let nowMainMenu = document.getElementById('main-menu')
+    nowMainMenu.style.display = (nowMainMenu.style.display == 'none') ? 'flex' : 'none';
+
+    let nextMainInstructions = document.getElementById('main-instructions')
+    nextMainInstructions.style.display = (nextMainInstructions.style.display == 'flex') ? 'none' : 'flex';
+})
+
+// SI HAY INSTANCIADO SÒLO UN JUGADOR, LLEVA A CANVAS, SI HAY INSTANCIADO UN PLAYER, LLEVA A ESCOGER PLAYER DOS
+document.querySelector('#img-player-1-yucaterco').addEventListener('click', e=> {
+    if(player && helper){
+        player.type = true
+        let nowPlayer = document.getElementById('main-choose-p1')
+        nowPlayer.style.display = (nowPlayer.style.display == 'none') ? 'flex' : 'none';
+    
+        let nextHelper = document.getElementById('main-choose-p2')
+        nextHelper.style.display = (nextHelper.style.display == 'flex') ? 'none' : 'flex';
+    } else if(player) {
+        player.type = true
+        let nowPlayer = document.getElementById('main-choose-p1')
+        nowPlayer.style.display = (nowPlayer.style.display == 'none') ? 'flex' : 'none';
+    
+        let nextCanvas = document.getElementById('main-playground')
+        nextCanvas.style.display = (nextCanvas.style.display == 'flex') ? 'none' : 'flex';
+    }
+})
+
+// SI HAY INSTANCIADO SÒLO UN JUGADOR, LLEVA A CANVAS, SI HAY INSTANCIADO UN PLAYER, LLEVA A ESCOGER PLAYER DOS
+document.querySelector('#img-player-1-yucaterca').addEventListener('click', e=> {
+    if(player && helper){
+        player.type = false
+        let nowPlayer = document.getElementById('main-choose-p1')
+        nowPlayer.style.display = (nowPlayer.style.display == 'none') ? 'flex' : 'none';
+    
+        let nextHelper = document.getElementById('main-choose-p2')
+        nextHelper.style.display = (nextHelper.style.display == 'flex') ? 'none' : 'flex';
+    } else if(player) {
+        player.type = false
+        let nowPlayer = document.getElementById('main-choose-p1')
+        nowPlayer.style.display = (nowPlayer.style.display == 'none') ? 'flex' : 'none';
+    
+        let nextCanvas = document.getElementById('main-playground')
+        nextCanvas.style.display = (nextCanvas.style.display == 'flex') ? 'none' : 'flex';
+    }
+})
+
+//ESCOGER CAMPECHANO 0 CAMPECHANA
+document.querySelector('#img-player-2-campechano').addEventListener('click', e=> {
+    helper.type = true
+    let nowHelper = document.getElementById('main-choose-p2')
+    nowHelper.style.display = (nowHelper.style.display == 'none') ? 'flex' : 'none';
+    
+    let nextCanvas = document.getElementById('main-playground')
+    nextCanvas.style.display = (nextCanvas.style.display == 'flex') ? 'none' : 'flex';
+})
+
+// SI HAY INSTANCIADO SÒLO UN JUGADOR, LLEVA A CANVAS, SI HAY INSTANCIADO UN PLAYER, LLEVA A ESCOGER PLAYER DOS
+document.querySelector('#img-player-2-campechana').addEventListener('click', e=> {
+    helper.type = false
+    let nowHelper = document.getElementById('main-choose-p2')
+    nowHelper.style.display = (nowHelper.style.display == 'none') ? 'flex' : 'none';
+    
+    let nextCanvas = document.getElementById('main-playground')
+    nextCanvas.style.display = (nextCanvas.style.display == 'flex') ? 'none' : 'flex';
+})
