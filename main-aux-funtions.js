@@ -117,7 +117,7 @@ function checkHealth() {
         }
 
         //Aquí debe ir el còdigo que selecciona una bomba random, la reproduce y al terminar sigue la vida
-        let bombaRandom = audiosBombas[Math.floor(Math.random()*(audiosBombas.length - 1))];
+        let bombaRandom = audiosBombas[Math.floor(Math.random()*(4))];
         bombaRandom.addEventListener('ended', function() {
             //myAudio.play()
             start()
@@ -284,6 +284,9 @@ addEventListener('keydown', e=>{
         } else {
             start()
         }
+    }
+    if(e.keyCode === 88){
+        gameOver()
     }
     keys[e.keyCode] = true
   })
