@@ -54,6 +54,10 @@ p {
     width: 250px;
 }
 
+#main-menu #btn-1-player{
+    display: none;
+}
+
 /* PÁGINA 2 - INSTRUCCIONES*/
 
 #main-instructions{
@@ -244,4 +248,8 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#main-playground > h2{
+    color: white;
 }

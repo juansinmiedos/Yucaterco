@@ -178,7 +178,6 @@ class Soyinita {
         this.width = 70
         this.height = 49
         this.damage = 30
-        this.addRemoveScore = addRemoveScore
         this.img = new Image()
         this.img.src = './assets/soyinita.png'
     }

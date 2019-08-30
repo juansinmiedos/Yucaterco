@@ -1,6 +1,7 @@
 //FUNCIONES AUXILIARES
 function start() {
     interval = setInterval(update, 500 / 60)
+    myAudio.volume = 0.2
     myAudio.play()
 }
 
@@ -57,6 +58,9 @@ function gameOver() {
         ctx.drawImage(looser, looserX, looserY, 400, 200)
     }
     myAudio.pause()
+    setTimeout(() => {
+        location.reload()
+    }, 3000);
 }
 
 function checkHealth() {
@@ -107,7 +111,6 @@ function checkHealth() {
         botonBomba.src = './assets/bomba-button.png'
         let botonBombaX = canvas.width / 2 -200
         let botonBombaY = canvas.height / 2 -100
-
         //clearInterval(interval)
         botonBomba.onload = () => {
             ctx.drawImage(botonBomba, botonBombaX, botonBombaY, 400, 200)
@@ -207,6 +210,7 @@ function crearSoyinita() {
     const max = 360
     const defPosition = 360
     if (frames % 2300 === 0) {
+        console.log('hola')
         const randomPosition = Math.floor(Math.random() * (max - min))
         soyinita.push(new Soyinita(canvas.width, defPosition))
     }
