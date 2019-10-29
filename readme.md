@@ -1,4 +1,4 @@
-![Yucaterco logo](https://juansinmied0s.github.io/Yucaterco/assets/logo.png)
+![Yucaterco logo](https://juansinmiedos.github.io/Yucaterco/assets/logo.png)
 
 # Yucaterco
 
